@@ -1,0 +1,38 @@
+---
+- name: 
+  hosts: all
+  become: true
+
+  vars:
+    LOCAL_PROJECT_HOME: "../myproject-app"
+    PROJECT_HOME: "/opt/myproject-app"
+    DB_NAME: "DB"
+    DB_USER: "root"
+    DB_PASS: "root"
+    DB_HOST: "44.203.12.255"
+    DB_PORT: "5432"
+    DB_HOST_PRIVATE: "10.0.1.162"
+
+  tasks:
+  - name: apt install required packages
+    apt:
+      update_cache: yes
+      name:
+        - wget
+        - curl 
+        - python3-pip
+        - python3-dev
+        - postgresql-server-dev-all
+        - nginx
+        - python3-venv        
+      state: present
+
+  - name: Create remote directory
+    file: path={{PROJECT_HOME}} state=directory
+
+  - name: Copy project code to website server
+    copy: src={{item}} dest={{PROJECT_HOME}} directory_mode=yes
+    with_fileglob:
+     - "{{LOCAL_PROJECT_HOME}}/*"
+
+ 
