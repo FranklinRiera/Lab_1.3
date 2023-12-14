@@ -8,12 +8,12 @@ terraform {
 }
 
 variable "my_access_key" {
-  description = "AKIA4LK7EUCEOVYHSTRG"
+  description = "AWS-Keypair"
   default = "no_access_key_value_found"
 }
 
 variable "my_secret_key" {
-  description = "7FiiL432Li10tixXFTXjDglTE4yhDQpoj5z3rmK5"
+  description = "AWS-Keypair"
   default = "no_secret_key_value_found"
 }
 
